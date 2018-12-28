@@ -51,7 +51,7 @@ func readFrequencyChanges(filename string) []int64 {
 func calculateResultingFrequency(freqChanges []int64) int64 {
 	var acc int64
 	for _, freqChange := range freqChanges {
-		acc = acc + freqChange
+		acc += freqChange
 	}
 	return acc
 }
@@ -62,7 +62,7 @@ func firstDuplicateFrequency(freqChanges []int64) int64 {
 
 	for {
 		for _, freqChange := range freqChanges {
-			acc = acc + freqChange
+			acc += freqChange
 
 			if _, ok := occurrences[acc]; ok {
 				return acc

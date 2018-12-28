@@ -97,9 +97,9 @@ func sumConflictingSquareInches(claims []claim) int {
 		for i := claim.x; i < claim.x+claim.width; i++ {
 			for j := claim.y; j < claim.y+claim.height; j++ {
 				if fabric[j][i] == 1 {
-					conflicting = conflicting + 1
+					conflicting += 1
 				}
-				fabric[j][i] = fabric[j][i] + 1
+				fabric[j][i] += 1
 			}
 		}
 	}

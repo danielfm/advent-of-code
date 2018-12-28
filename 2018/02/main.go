@@ -52,8 +52,8 @@ func getOccurrences(boxId string) (int, int) {
 	occurrences := map[rune]int{}
 
 	for _, ch := range boxId {
-		if count, ok := occurrences[ch]; ok {
-			occurrences[ch] = count + 1
+		if _, ok := occurrences[ch]; ok {
+			occurrences[ch] += 1
 		} else {
 			occurrences[ch] = 1
 		}
@@ -61,10 +61,10 @@ func getOccurrences(boxId string) (int, int) {
 
 	for _, val := range occurrences {
 		if twos == 0 && val == 2 {
-			twos = twos + 1
+			twos += 1
 		}
 		if threes == 0 && val == 3 {
-			threes = threes + 1
+			threes += 1
 		}
 	}
 
