@@ -2,10 +2,42 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"reflect"
 	"testing"
 )
+
+func Test_loadGrid(t *testing.T) {
+	points := []point{
+		{id: 0, x: 1, y: 1},
+		{id: 1, x: 1, y: 6},
+		{id: 2, x: 8, y: 3},
+		{id: 3, x: 3, y: 4},
+		{id: 4, x: 5, y: 5},
+		{id: 5, x: 8, y: 9},
+	}
+
+	expected := make(grid)
+	for _, p := range points {
+		expected[p] = 0
+	}
+
+	actual := loadGrid("input.test")
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected grid to be %+v, but was %+v", expected, actual)
+	}
+}
+
+func Test_maxPoint(t *testing.T) {
+	grid := loadGrid("input.test")
+
+	expected := point{x: 8, y: 9}
+	actual := grid.maxPoint()
+
+	if !reflect.DeepEqual(actual, expected) {
+		t.Errorf("Expected max point to be %+v, but was %+v", expected, actual)
+	}
+}
 
 func Test_manhattanDistance(t *testing.T) {
 	testCases := []struct {
@@ -39,91 +71,24 @@ func Test_manhattanDistance(t *testing.T) {
 	}
 }
 
-func Test_loadPoints(t *testing.T) {
-	expected := []point{
-		{
-			x: 1,
-			y: 1,
-		},
-		{
-			x: 1,
-			y: 6,
-		},
-		{
-			x: 8,
-			y: 3,
-		},
-		{
-			x: 3,
-			y: 4,
-		},
-		{
-			x: 5,
-			y: 5,
-		},
-		{
-			x: 8,
-			y: 9,
-		},
-	}
-	actual := loadPoints("input.test")
-
-	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Expected %+v to be %+v", actual, expected)
-	}
-}
-
-func Test_makeGrid(t *testing.T) {
-	points := loadPoints("input.test")
-
-	expected := [][]int{
-		{+0, +0, +0, +0, +0, -1, +2, +2, +2},
-		{+0, +0, +0, +0, +0, -1, +2, +2, +2},
-		{+0, +0, +0, +3, +3, +4, +2, +2, +2},
-		{+0, +0, +3, +3, +3, +4, +2, +2, +2},
-		{-1, -1, +3, +3, +3, +4, +4, +2, +2},
-		{+1, +1, -1, +3, +4, +4, +4, +4, +2},
-		{+1, +1, +1, -1, +4, +4, +4, +4, -1},
-		{+1, +1, +1, -1, +4, +4, +4, +5, +5},
-		{+1, +1, +1, -1, +4, +4, +5, +5, +5},
-		{+1, +1, +1, -1, +5, +5, +5, +5, +5},
-	}
-	actual := makeGrid(points)
-
-	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Expected grid to be %+v, but was %+v", expected, actual)
-	}
-}
-
-func Test_calculateArea(t *testing.T) {
-	points := loadPoints("input.test")
-	grid := makeGrid(points)
-
-	expected := map[int]int{
-		0: math.MaxInt64,
-		1: math.MaxInt64,
-		2: math.MaxInt64,
-		3: 9,
-		4: 17,
-		5: math.MaxInt64,
-	}
-
-	actual := calculateArea(grid)
-
-	if !reflect.DeepEqual(actual, expected) {
-		t.Errorf("Expected areas to be %+v, but was %+v", expected, actual)
-	}
-}
-
-func Test_pointIDWithLargestNonInfiniteArea(t *testing.T) {
-	points := loadPoints("input.test")
-	grid := makeGrid(points)
-	area := calculateArea(grid)
+func Test_largestNonInfiniteArea(t *testing.T) {
+	grid := loadGrid("input.test")
 
 	expected := 17
-	actual := pointIDWithLargestNonInfiniteArea(area)
+	actual := grid.largestNonInfiniteArea()
 
 	if actual != expected {
 		t.Errorf("Expected largest non-infinite area to be %d, but was %d", expected, actual)
+	}
+}
+
+func Test_areaWithin(t *testing.T) {
+	grid := loadGrid("input.test")
+
+	expected := 16
+	actual := grid.areaWithin(32)
+
+	if actual != expected {
+		t.Errorf("Expected area within max total distance to be %d, but was %d", expected, actual)
 	}
 }
