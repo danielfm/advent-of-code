@@ -18,7 +18,7 @@ To show the solution for each puzzle, run:
 
 ```sh
 # Go to the puzzle directory
-cd 2018/01
+$ cd 2018/01
 
 # Runs the puzzle with the provided input file
 $ go run main.go
