@@ -18,6 +18,7 @@ type point struct {
 type grid map[point]int
 
 var input = flag.String("input", "input", "Puzzle input file")
+var area = flag.Int("area", 10000, "Total max distance threshold")
 
 func main() {
 	flag.Parse()
@@ -25,7 +26,7 @@ func main() {
 	grid := loadGrid(*input)
 
 	fmt.Printf("Size of the largest non-infinite area: %d.\n", grid.largestNonInfiniteArea())
-	fmt.Printf("Size of the region containing all locations within total max distance: %d.\n", grid.areaWithin(10000))
+	fmt.Printf("Size of the region containing all locations within total max distance: %d.\n", grid.areaWithin(*area))
 }
 
 func (g grid) maxPoint() point {

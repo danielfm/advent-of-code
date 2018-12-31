@@ -23,7 +23,8 @@ $ cd 2018/01
 # Runs the puzzle with the provided input file
 $ go run main.go
 
-# Runs the puzzle with a custom input file
+# Runs the puzzle with a custom input file (some puzzles might
+# expose additional flags)
 $ go run main.go -input=./path/to/input/file
 ```
 
