@@ -16,11 +16,8 @@ func main() {
 
 	freqChanges := readFrequencyChanges(*input)
 
-	freq := calculateResultingFrequency(freqChanges)
-	fmt.Printf("The resulting frequency is %d.\n", freq)
-
-	dupFreq := firstDuplicateFrequency(freqChanges)
-	fmt.Printf("First duplicate resulting frequency is %d.\n", dupFreq)
+	fmt.Printf("The resulting frequency is %d.\n", calculateResultingFrequency(freqChanges))
+	fmt.Printf("First duplicate resulting frequency is %d.\n", firstDuplicateFrequency(freqChanges))
 }
 
 func readFrequencyChanges(filename string) []int64 {
