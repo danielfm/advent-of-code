@@ -63,9 +63,8 @@ func firstDuplicateFrequency(freqChanges []int64) int64 {
 
 			if _, ok := occurrences[acc]; ok {
 				return acc
-			} else {
-				occurrences[acc] = true
 			}
+			occurrences[acc] = true
 		}
 	}
 }
