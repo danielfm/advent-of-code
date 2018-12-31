@@ -10,9 +10,8 @@ These are my solutions (written in Go) for some of these puzzles.
 
 ## How Is This Repo Organized
 
-Each puzzle is inside its own folder following the convention
-`yyyy/dd`, where `yyyy` is the year (i.e. `2018`), and `dd` is the puzzle day
-(i.e. `01`).
+Each puzzle is inside its own folder following the convention `yyyy/dd`,
+where `yyyy` is the year (i.e. `2018`), and `dd` is the puzzle day (i.e. `01`).
 
 To show the solution for each puzzle, run:
 
