@@ -142,7 +142,6 @@ func (g grid) areaWithin(threshold int) int {
 	grid := make(grid)
 	maxPoint := g.maxPoint()
 
-	// Calculate the closest element for every position.
 	for x := 0; x <= maxPoint.x; x++ {
 		for y := 0; y <= maxPoint.y; y++ {
 			p := point{x: x, y: y}
