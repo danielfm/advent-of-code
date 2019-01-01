@@ -39,7 +39,7 @@ func Test_maxPoint(t *testing.T) {
 	}
 }
 
-func Test_manhattanDistance(t *testing.T) {
+func Test_distanceTo(t *testing.T) {
 	testCases := []struct {
 		p1, p2   point
 		expected int
@@ -63,7 +63,7 @@ func Test_manhattanDistance(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(fmt.Sprintf("p1=%+v,p2=%+v", tc.p1, tc.p2), func(t *testing.T) {
-			actual := manhattanDistance(tc.p1, tc.p2)
+			actual := tc.p1.distanceTo(tc.p2)
 			if actual != tc.expected {
 				t.Errorf("Expected distance to be %d, but was %d", tc.expected, actual)
 			}

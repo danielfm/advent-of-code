@@ -29,6 +29,10 @@ func main() {
 	fmt.Printf("Size of the region containing all locations within total max distance: %d.\n", grid.areaWithin(*maxTotalDistance))
 }
 
+func (p point) distanceTo(p2 point) int {
+	return int(math.Abs(float64(p.x-p2.x)) + math.Abs(float64(p.y-p2.y)))
+}
+
 func (g grid) maxPoint() point {
 	maxX, maxY := 0, 0
 
@@ -78,10 +82,6 @@ func loadGrid(filename string) grid {
 	return grid
 }
 
-func manhattanDistance(p1, p2 point) int {
-	return int(math.Abs(float64(p1.x-p2.x)) + math.Abs(float64(p1.y-p2.y)))
-}
-
 func (g grid) largestNonInfiniteArea() int {
 	distGrid := make(grid)
 	maxPoint := g.maxPoint()
@@ -96,7 +96,7 @@ func (g grid) largestNonInfiniteArea() int {
 			closestPoints := []point{}
 
 			for p := range g {
-				d := manhattanDistance(gp, p)
+				d := gp.distanceTo(p)
 
 				if d < closestDistance {
 					closestDistance = d
@@ -148,7 +148,7 @@ func (g grid) areaWithin(threshold int) int {
 			sum := 0
 
 			for pg := range g {
-				sum += manhattanDistance(p, pg)
+				sum += p.distanceTo(pg)
 			}
 
 			grid[p] = sum
