@@ -12,7 +12,6 @@ import (
 var input = flag.String("input", "input", "Puzzle input file")
 
 type node struct {
-	header   []int
 	children []node
 	meta     []int
 }
@@ -50,19 +49,19 @@ func loadTree(filename string) node {
 func parseNode(data []int, offset int) (node, int) {
 	n := node{}
 
-	n.header = data[offset : offset+2]
+	header := data[offset : offset+2]
 	offset += 2
 
-	if n.header[0] > 0 {
-		for i := 0; i < n.header[0]; i++ {
+	if header[0] > 0 {
+		for i := 0; i < header[0]; i++ {
 			child, newOffset := parseNode(data, offset)
 			n.children = append(n.children, child)
 			offset = newOffset
 		}
 	}
 
-	n.meta = data[offset : offset+n.header[1]]
-	offset += n.header[1]
+	n.meta = data[offset : offset+header[1]]
+	offset += header[1]
 
 	return n, offset
 }
