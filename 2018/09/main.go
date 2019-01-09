@@ -9,9 +9,8 @@ var numPlayers = flag.Int("num-players", 425, "Number of players")
 var lastMarble = flag.Int("last-marble", 70848, "Last marble worth, in points")
 
 type marble struct {
-	id   int
-	prev *marble
-	next *marble
+	id         int
+	prev, next *marble
 }
 
 func main() {
